@@ -1,0 +1,23 @@
+{
+  "name": "uptime-monitor",
+  "version": "1.0.0",
+  "description": "A Url up-time monitor",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lawrence-chege/Uptime-Monitor.git"
+  },
+  "keywords": [
+    "up-time",
+    "monitor"
+  ],
+  "author": "Larry Chege",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lawrence-chege/Uptime-Monitor/issues"
+  },
+  "homepage": "https://github.com/lawrence-chege/Uptime-Monitor#readme"
+}
