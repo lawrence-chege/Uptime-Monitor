@@ -13,4 +13,4 @@ A up-time monitor
 - Allow a signed-in user to sign out and invalidates their token
 - Allow a signed-in user to use their token to create a newcheck
 - In the background, workers perform 'checks' at appropriate times, and send alerts to the users when a check changes its state from'up' to 'down' an viseversa
-- 
+
