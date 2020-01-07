@@ -43,15 +43,17 @@ const server = http.createServer((req, res)=>{
     });
 
     req.on('end', ()=>{
-        buffer +=decoder.end();
+        buffer += decoder.end();
+
+        //send the response
+        res.end('Hello World\n');
+
+        //log the url
+        console.log("Request recieved with this payload:", buffer)
+
     });
 
-
-
-    res.end('Hello World\n');
-
-    //log the url
-    console.log("Request recieved with this payload:", buffer)
+  
 });
 
 
