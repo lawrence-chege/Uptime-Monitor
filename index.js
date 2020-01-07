@@ -7,8 +7,10 @@
 // Dependencies
 const http = require('http');
 const url = require('url');
+const stringDecoder = require('string_decoder').StringDecoder;
 
 // the server should respond
+const port = 3500
 
 const server = http.createServer((req, res)=>{
     
@@ -29,11 +31,27 @@ const server = http.createServer((req, res)=>{
 
     const method = req.method.toLowerCase();
 
+    //get headers
+    const headers = req.headers;
+
+    //get the payload
+    const decoder = new stringDecoder('utf-8');
+    const buffer = '';
+
+    req.on('data', (data) => {
+        buffer += decoder.write(data);
+    });
+
+    req.on('end', ()=>{
+        buffer +=decoder.end();
+    });
+
+
+
     res.end('Hello World\n');
 
     //log the url
-    console.log("Request recieved on path: "+ trimmedPath +"With this method: "+ method);
-    console.log("These are the query string parameters:",querryStringObject)
+    console.log("Request recieved with this payload:", buffer)
 });
 
 
@@ -41,6 +59,6 @@ const server = http.createServer((req, res)=>{
 
 // Set server to listen to port 
 
-server.listen(3000, function(){
-    console.log("The server is listening on port 3000 now");
+server.listen(port, function(){
+    console.log("The server is listening on port "+ port+" now");
 });
