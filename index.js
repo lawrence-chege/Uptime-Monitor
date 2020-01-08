@@ -8,9 +8,11 @@
 const http = require('http');
 const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
+const config = require('./config');
 
 // the server should respond
-const port = 3500
+const port = config.port;
+const env = config.envName
 
 const server = http.createServer((req, res)=>{
     
@@ -89,7 +91,7 @@ const server = http.createServer((req, res)=>{
 // Set server to listen to port 
 
 server.listen(port, function(){
-    console.log("The server is listening on port "+ port+" now");
+    console.log("The server is listening on port "+ port+" now in" +env+ "mode");
 });
 
 //Define the andlers
