@@ -36,20 +36,46 @@ const server = http.createServer((req, res)=>{
 
     //get the payload
     const decoder = new stringDecoder('utf-8');
-    const buffer = '';
+    let buffer = '';
 
     req.on('data', (data) => {
         buffer += decoder.write(data);
     });
 
-    req.on('end', ()=>{
+    req.on('end', function(){
         buffer += decoder.end();
 
-        //send the response
-        res.end('Hello World\n');
+        //choose the handler for request
+        const chosenHandler = typeof(router[trimmedPath]) !== 'undefined'? router[trimmedPath] : handlers.notFound
 
-        //log the url
-        console.log("Request recieved with this payload:", buffer)
+        //construct the dater object to send to handler
+
+        const data = {
+            'trimmedPath' : trimmedPath,
+            'queryStringObject': querryStringObject,
+            'method': method,
+            'headers' : headers,
+            'payload': buffer
+
+        };
+
+        //route the request to the specified handler
+        chosenHandler(data, (statusCode, payload)=>{
+            //use the status code called back by handler or default to 200
+            //use the payload called back by handler or use an empty object
+            statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
+            payload = typeof(payload) == 'object'? payload : {};
+
+            //convert payload to sting
+            const payloadString = JSON.stringify(payload);
+
+            //return the response
+            res.writeHead(statusCode);
+            res.end(payloadString);
+            console.log("Returning this response:", statusCode, payloadString)
+
+
+        });
 
     });
 
@@ -64,3 +90,25 @@ const server = http.createServer((req, res)=>{
 server.listen(port, function(){
     console.log("The server is listening on port "+ port+" now");
 });
+
+//Define the andlers
+const handlers = {}
+
+//user handler
+handlers.user = (data, callback) =>{
+    // callback a http status code and a payload object
+    callback(406,{'name': 'User hnadler'});
+
+};
+
+//Not found handler
+handlers.notFound = (data, callback) =>{
+    callback(404);
+
+};
+
+// Define a request router
+const router = {
+    'user' : handlers.user
+     
+}
