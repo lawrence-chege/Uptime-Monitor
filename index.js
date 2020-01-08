@@ -91,7 +91,7 @@ const server = http.createServer((req, res)=>{
 // Set server to listen to port 
 
 server.listen(port, function(){
-    console.log("The server is listening on port "+ port+" now in" +env+ "mode");
+    console.log("The server is listening on port "+ port+" now in " +env+ " mode");
 });
 
 //Define the andlers
