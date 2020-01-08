@@ -123,6 +123,11 @@ handlers.user = (data, callback) => {
     callback(406, { 'name': 'User handler' });
 
 };
+//uptime router
+handlers.ping = (data, callback) => {
+    callback(200);
+
+};
 
 //Not found handler
 handlers.notFound = (data, callback) => {
@@ -132,6 +137,7 @@ handlers.notFound = (data, callback) => {
 
 // Define a request router
 const router = {
-    'user': handlers.user
+    'user': handlers.user,
+    'ping': handlers.ping
 
 }
