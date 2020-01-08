@@ -94,6 +94,11 @@ server.listen(port, function(){
     console.log("The server is listening on port "+ port+" now in " +env+ " mode");
 });
 
+// A unified server to handle server logic
+const unifiedServer = (req,res) => {
+
+};
+
 //Define the andlers
 const handlers = {}
 
