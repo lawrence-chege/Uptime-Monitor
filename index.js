@@ -97,7 +97,7 @@ const handlers = {}
 //user handler
 handlers.user = (data, callback) =>{
     // callback a http status code and a payload object
-    callback(406,{'name': 'User hnadler'});
+    callback(406,{'name': 'User handler'});
 
 };
 
