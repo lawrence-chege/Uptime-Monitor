@@ -15,13 +15,13 @@ const _data = require('./lib/data')
 
 //TESTing
 // @TODO delete this
-_data.update('test','maps',{'foo':'bas'},(err)=>{
+// _data.update('test','maps',{'foo':'bas'},(err)=>{
+//     console.log('this was the error',err);
+// });
+
+_data.delete('test','maps',(err)=>{
     console.log('this was the error',err);
 });
-
-// _data.read('test','maps',(err,data)=>{
-//     console.log('this was the error',err,' and this was the data',data);
-// });
 
 // the server should respond
 const httpPort = config.httpPort;
