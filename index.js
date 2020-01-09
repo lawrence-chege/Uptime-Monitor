@@ -11,17 +11,7 @@ const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
 const fs = require('fs');
-const _data = require('./lib/data')
 
-//TESTing
-// @TODO delete this
-// _data.update('test','maps',{'foo':'bas'},(err)=>{
-//     console.log('this was the error',err);
-// });
-
-_data.delete('test','maps',(err)=>{
-    console.log('this was the error',err);
-});
 
 // the server should respond
 const httpPort = config.httpPort;
