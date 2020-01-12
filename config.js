@@ -33,5 +33,5 @@
 
  //Export the module
 
- module.exports = environmentToExport;
+ export default environmentToExport;
 
