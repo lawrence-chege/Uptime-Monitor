@@ -12,6 +12,7 @@ const stringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config').default;
 const fs = require('fs');
 const handlers = require('./lib/handlers').default;
+const helpers = require('./lib/helpers').default;
 
 
 // the server should respond
@@ -88,7 +89,7 @@ const unifiedServer = (req, res) => {
             'queryStringObject': querryStringObject,
             'method': method,
             'headers': headers,
-            'payload': buffer
+            'payload': helpers.parseJsonToObject(buffer)
 
         };
 
