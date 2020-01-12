@@ -9,10 +9,10 @@ const http = require('http');
 const https = require('https');
 const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
-const config = require('./config').default;
+const config = require('./config');
 const fs = require('fs');
-const handlers = require('./lib/handlers').default;
-const helpers = require('./lib/helpers').default;
+const handlers = require('./lib/handlers');
+const helpers = require('./lib/helpers');
 
 
 // the server should respond
@@ -121,7 +121,7 @@ const unifiedServer = (req, res) => {
 
 // Define a request router
 const router = {
-    'user': handlers.users,
+    'users': handlers.users,
     'ping': handlers.ping
 
 }
