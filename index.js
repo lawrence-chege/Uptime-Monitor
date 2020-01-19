@@ -16,14 +16,14 @@ const helpers = require('./lib/helpers');
 
 
 // the server should respond
-const httpPort = process.env.PORT || config.httpPort;
+// const httpPort = process.env.PORT || config.httpPort;
 const httpsPort = process.env.PORT || config.httpsPort;
 const env = config.envName
 
 //instantiate http server
-const httpServer = http.createServer((req, res) => {
-    unifiedServer(req,res);
-});
+// const httpServer = http.createServer((req, res) => {
+//     unifiedServer(req,res);
+// });
 
 //instntiate https server
 const httpsServerOptions ={
@@ -38,9 +38,9 @@ const httpsServer = https.createServer(httpsServerOptions,(req, res) => {
 
 // Set server to listen to port 
 
-httpServer.listen(httpPort, function () {
-    console.log("The server is listening on port " + httpPort + " now in " + env + " mode");
-});
+// httpServer.listen(httpPort, function () {
+//     console.log("The server is listening on port " + httpPort + " now in " + env + " mode");
+// });
 
 httpsServer.listen(httpsPort, function () {
     console.log("The server is listening on port " + httpsPort + " now in " + env + " mode");
