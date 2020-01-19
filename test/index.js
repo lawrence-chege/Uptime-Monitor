@@ -38,13 +38,31 @@
     done();
 }
 
+// count all the tests
+_app.countTests = ()=>{
+    let counter = 0;
+    for(let key in _app.tests){
+        if (_app.tests.hashOwnProperty(key)){
+            let subTests = _app.tests[key];
+            for (let testName in subTests){
+                if(subTests.hashOwnProperty(testName)){
+                    counter ++;
+                }
+            }
+
+        }
+    }
+    return counter;
+
+};
+
 //run the tests
 _app.runTests = () =>{
     let errors = [];
     let success = 0;
     let limit = _app.countTests();
     let counter = 0;
-    for(let key in _app.tests[key]){
+    for(let key in _app.tests){
         if (_app.tests.hashOwnProperty(key)){
             let subTests = _app.tests[key];
             for (let testName in subTests){
@@ -83,4 +101,32 @@ _app.runTests = () =>{
 
         }
     }
-}
+};
+
+//Produce test report
+_app.produceTestReport = (limit,success,errors){
+    console.log("");
+    console.log("----------- BEGIN TEST REPORT ----------");
+    console.log("");
+    console.log("Total Tests Run: ", limit);
+    console.log("Pass: ", success);
+    console.log("Fail: ", errors.length);
+    console.log("");
+
+    // if there are errors, print them in deatil
+    if (errors.length > 0){
+        console.log("-------- BEGIN ERROR DETAILS --------");
+        console.log("");
+
+        errors.forEach((testError)=>{
+            console.log('\x1b[31m%s\x1b[0m', tmpTestName);
+            console.log(testError.error);
+            console.log("");
+
+        });
+        console.log("");
+        console.log("---------- END ERROR DETAILS ----------");
+    }
+    console.log("");
+    console.log("---------- END TEST REPORT ----------");
+};
