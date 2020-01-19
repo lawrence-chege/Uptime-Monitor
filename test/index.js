@@ -124,7 +124,12 @@ _app.produceTestReport = (limit,success,errors)=>{
 
         errors.forEach((testError)=>{
             console.log('\x1b[31m%s\x1b[0m', testError.name);
-            console.log(testError.error);
+            console.log({
+                "Error Type": testError.error.name,
+                "Expected value": testError.error.expected,
+                "Actual Value": testError.error.actual,
+                "Test operator": testError.error.operator
+            });
             console.log("");
 
         });
