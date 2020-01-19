@@ -16,8 +16,8 @@ const helpers = require('./lib/helpers');
 
 
 // the server should respond
-const httpPort = config.httpPort;
-const httpsPort = config.httpsPort;
+const httpPort = process.env.PORT || config.httpPort;
+const httpsPort = httpPort = process.env.PORT || config.httpsPort;
 const env = config.envName
 
 //instantiate http server
