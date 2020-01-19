@@ -4,8 +4,8 @@
 
  //Dependencies
 
- const helpers = require('/../lib/helpers');
- const assert = require('/assert');
+ const helpers = require('./../lib/helpers');
+ const assert = require('assert');
 
  //Aplication logic
 
@@ -18,7 +18,7 @@
  };
 
  //Assert that getANumber is returning a number
- _app.tests.unit['helpers.getANumber should return 1'] = done => {
+ _app.tests.unit['helpers.getANumber should return a number'] = done => {
      const val = helpers.getANumber();
      assert.equal(typeof(val),'number');
      done();
@@ -32,7 +32,7 @@
 }
 
  //Assert that getANumber is returning 2
- _app.tests.unit['helpers.getANumber should return 1'] = done => {
+ _app.tests.unit['helpers.getANumber should is returning 2'] = done => {
     const val = helpers.getANumber();
     assert.equal(val,2);
     done();
@@ -42,10 +42,10 @@
 _app.countTests = ()=>{
     let counter = 0;
     for(let key in _app.tests){
-        if (_app.tests.hashOwnProperty(key)){
+        if (_app.tests.hasOwnProperty(key)){
             let subTests = _app.tests[key];
             for (let testName in subTests){
-                if(subTests.hashOwnProperty(testName)){
+                if(subTests.hasOwnProperty(testName)){
                     counter ++;
                 }
             }
@@ -58,16 +58,20 @@ _app.countTests = ()=>{
 
 //run the tests
 _app.runTests = () =>{
+    console.log("------------Running tests-----------")
     let errors = [];
     let success = 0;
     let limit = _app.countTests();
     let counter = 0;
     for(let key in _app.tests){
-        if (_app.tests.hashOwnProperty(key)){
+        
+        if (_app.tests.hasOwnProperty(key)){
+
             let subTests = _app.tests[key];
             for (let testName in subTests){
-                if(subTests.hashOwnProperty(testName)){
-                    () =>{
+                
+                if(subTests.hasOwnProperty(testName)){
+                    (() =>{
                         let tmpTestName = testName;
                         let testValue = subTests[testName];
                         // call the tests
@@ -95,7 +99,7 @@ _app.runTests = () =>{
                             }
                         }
 
-                    }
+                    })();
                 }
             }
 
@@ -104,7 +108,7 @@ _app.runTests = () =>{
 };
 
 //Produce test report
-_app.produceTestReport = (limit,success,errors){
+_app.produceTestReport = (limit,success,errors)=>{
     console.log("");
     console.log("----------- BEGIN TEST REPORT ----------");
     console.log("");
@@ -113,13 +117,13 @@ _app.produceTestReport = (limit,success,errors){
     console.log("Fail: ", errors.length);
     console.log("");
 
-    // if there are errors, print them in deatil
+    // if there are errors, print them in detail
     if (errors.length > 0){
         console.log("-------- BEGIN ERROR DETAILS --------");
         console.log("");
 
         errors.forEach((testError)=>{
-            console.log('\x1b[31m%s\x1b[0m', tmpTestName);
+            console.log('\x1b[31m%s\x1b[0m', testError.name);
             console.log(testError.error);
             console.log("");
 
@@ -130,3 +134,5 @@ _app.produceTestReport = (limit,success,errors){
     console.log("");
     console.log("---------- END TEST REPORT ----------");
 };
+
+_app.runTests();
